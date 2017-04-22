@@ -27,11 +27,13 @@ The program code must be documented.
 
 Desirable requirements:
 
-1. It is advisable to write to C # or VB .NET.
+1. It is advisable to write to C#.
 
 2. Use WCF technology.
 
 3. Using UnitTests (nUnit or unit tests from MS VS2005).
+
+4. Not to have unnecessary dependencies and 3rd party libraries in use.
 
 ## Client part
 
@@ -132,13 +134,10 @@ Examples:
 
 Format: `LOCK [[DRIVE:] Path] FileName`
 
-Note: multiple users can lock the same file, and it can not be deleted until all users have removed
+Note: multiple users can lock the same file, and it can not be deleted until all users have removed blocking. 
+The user can not lock the file 2 or more times.
 
-Blocking. The user can not lock the file 2 or more times.
-
-The directory can not be deleted if it has locked files. File
-
-Can not be deleted if it is blocked.
+The directory can not be deleted if it has locked files. File can not be deleted if it is blocked.
 
 Examples:
 ```
@@ -163,9 +162,8 @@ Note: The directory should be copied with all content. Destination can not point
 
 Examples:
 ```
-1. COPY test1 c: \ temp - copies the subdirectory test1 from the current
+1. COPY test1 c: \ temp - copies the subdirectory test1 from the current directory into the directory c: \ temp
 ```
-Directory into the directory c: \ temp
 
 **MOVE** - moves a file or directory to another directory
 
@@ -187,26 +185,16 @@ Examples:
 1. PRINT - displays the directory tree as shown below.
 
 C:
-
-| _DIR1
-
-| | | | _DIR2
-
-| | | | | |
-
-| | | | _DIR4
-
-| | | | | | | _DIR3
-
-| | | | | | | _1.txt
-
-| | | | | |
-
-| | | | _DIR5
-
-| | | | | | | _ 2.txt [LOCKED by Me]
-
-| | | | | | | _ 3.txt [LOCKED by TestUser]
+|_DIR1
+| |_DIR2
+| |
+| |_DIR4
+| | |_DIR3
+| | | |_1.txt
+| |
+| |_DIR5
+| | |_ 2.txt [LOCKED by Me]
+| | |_ 3.txt [LOCKED by TestUser]
 ```
 
 Additional Information:
@@ -229,13 +217,10 @@ Additional Information:
 
 9. When displaying blocked files, you must specify that it is blocked, and by which user.
 
-10. When changing the VFS, all client  (except for the one who made the change) should receive a notification in the form of a text message about who and what change did, for example, 
-
-in this form: 
+10. When changing the VFS, all client  (except for the one who made the change) should receive a notification in the form of a text message about who and what change did, for example, in this form: 
 ```
 UserName performing command: RD c: \ test
 ```
-
 where UserName is the user name specified in the command `connect`
 
 
@@ -256,11 +241,11 @@ where UserName is the user name specified in the command `connect`
  - Host
 	- simple console host for test purpose
 	- Windows-service based host - Host.WinService.exe. Can be setup as a service Setup-проект 
-	or used as console application for testing purpose. Run with "/m" key for that.
+	or used as console application for testing purpose. Run with `"/m"` key for that.
 	
-	>>Host.WinService.exe /m
+	```Host.WinService.exe /m```
 	
-	All the settings are in config file: host address and a number of restrart trials for WCF-service, in case of host/service failure
+	All the settings are in config file: host address and a number of restrart trials for WCF-service, in case of host/service failure.
 	
 	
 	
