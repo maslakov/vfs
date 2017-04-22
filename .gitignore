@@ -1,0 +1,25 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+[Oo]bj/
+[Bb]in/
+*.log
+packages/
+
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.sln.GhostDoc.xml
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Others
+*.datasource
+*.bak
+.vs/
